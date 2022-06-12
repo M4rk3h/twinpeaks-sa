@@ -1,7 +1,9 @@
 # 1 - Twin Peaks Sentiment Analysis (SA)
 This doc is a revision of my undergraduate dissertation and my introduction into data science.
 
-```{r import-data, echo=FALSE, message=FALSE, warning=FALSE}
+Import libraries here.
+```{r import-libraries, echo=FALSE, message=FALSE, warning=FALSE}
+# Here are a bunch of libraries, we might not use.
 library(dplyr)												
 library(dplyr)											
 library(readr)
@@ -9,8 +11,11 @@ library(tm) #Text mining
 library(SnowballC) #Required for stemming
 library(RColorBrewer) #Required for color palettes
 library(ggplot2) #Required for plotting
-library(wordcloud)
+library(wordcloud2)
+```
 
+Import the data.
+```{r import-data, echo=FALSE, message=FALSE, warning=FALSE}
 df <- 
   list.files(path = "C:/Users/markb/Documents/GitHub/twinpeaks-sa/src/data",
 					pattern = "*.txt", 
@@ -22,8 +27,9 @@ df %>% head()
 
 ```
 
-Remove stop words
+Remove stop words.
 ```{r}
-df_clean <- tm_map()
+docs <- Corpus(VectorSource(df))
+inspect(docs)
 ```
 
