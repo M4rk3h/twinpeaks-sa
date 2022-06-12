@@ -29,7 +29,43 @@ df %>% head()
 
 Remove stop words.
 ```{r}
-docs <- Corpus(VectorSource(df))
-inspect(docs)
+# import tidytext library
+library(tidytext)
+# create a var to hold unnested df
+tidy_tp <- df %>%
+  unnest_tokens(word, Text)
+# check the head
+tidy_tp %>%
+  head()
+```
+```{r remove-stop-words}
+# remove the stop words
+tidy_tp <- tidy_tp %>% 
+  anti_join(stop_words)
+
+# check the head
+tidy_tp %>%
+  head()
+```
+
+Lets count the words
+```{r}
+tidy_tp %>%
+  count(word, sort = TRUE) 
+
+stop_words
+```
+
+
+```{r}
+library(ggplot2)
+
+tidy_tp %>%
+  count(word, sort = TRUE) %>%
+  filter(n > 600) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(n, word)) +
+  geom_col() +
+  labs(y = NULL)
 ```
 
